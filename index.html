@@ -1,95 +1,398 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>사랑해 미지야</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=800, user-scalable=no">
+        <title>미지를 위한 공간</title>
     <style>
-        
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: Arial, sans-serif;
-        }
         body {
-            background: linear-gradient(135deg, #f7e28f, #fae6cf);
-            color: rgb(0, 0, 0);
+            background-color: #fffde7;
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 80px 0 0 0; /* 네비게이션 바 높이만큼 여백 추가 */
+    
+    min-width: 1000px; /* ✅ 최소 너비 설정 (1000px 이하로 작아지지 않음) */
+    overflow-x: auto; /* ✅ 화면 크기가 작아질 때 가로 스크롤 생기게 설정 */
+    white-space: nowrap; /* ✅ 내부 요소가 자동으로 줄어들지 않도록 설정 */
+}
+
+.container {
+    max-width: 1000px; /* ✅ 최대 너비 유지 */
+    width: 80%; /* ✅ 화면 크기에 따라 조정되도록 설정 */
+    min-width: 800px; /* ✅ 최소 크기 유지 */
+}
+        .header {
+            position: fixed; /* 네비게이션 바 고정 */
+            top: 0;
+            left: 0;
+            width: 100%;
+            min-width: 800px;
+            height: 60px;
+            background-color: #ffeb3b;
+            padding: 15px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+            background-color: #ffeb3b;
+            padding: 15px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            overflow-x: auto;
+        }
+        .logo {
+    font-size: 3rem; /* ✅ 기본 크기 유지 */
+    font-weight: bold;
+    color: #f57f17;
+    min-width: 120px; /* ✅ 최소 크기 설정 */
+    white-space: nowrap; /* ✅ 줄바꿈 방지 */
+    
+}
+
+        .nav {
             display: flex;
             justify-content: center;
-            align-items: center;
-            height: 100vh;
-            text-align: center;
-            position: relative;
+            flex-grow: 1;
+            gap: 50px;
+            white-space: nowrap;
+            flex-wrap: nowrap;
+        }
+        .nav a {
+            text-decoration: none;                                                                                                                                   
+            color: #6d4c41;
+            font-size: 1.2rem;
+            transition: color 0.3s;
+            cursor: pointer;
+        }
+        .nav a:hover {
+            color: #f57f17;
         }
         .container {
-            background: rgba(255, 255, 255, 0.2);
-            padding: 40px;
-            border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            max-width: 1000px;
+            margin: 80px auto;
+            text-align: center;
+            padding: 20px;
             display: flex;
             flex-direction: column;
             align-items: center;
-            position: relative;
-            z-index: 2;
         }
-        .image-wrapper {
-            position: absolute;
-            top: 50%;
-            width: 130%;
-            display: flex;
-            justify-content: space-around;
-            transform: translateY(-50%);
-            padding: 0 10px;
+        #loveMessage, #dday {
+            font-size: 2rem;
+            font-weight: bold;
+            margin-top: -20px;
         }
-        .image-wrapper img {
-            width: 420px;
-            height: auto;
-            border-radius: 10px;
-            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+        .content {
+            background-color: #fff8e1;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            display: none;
+            width: 50%;
         }
-        .center-image {
-            margin-top: 15px;
-            width: 250px;
-            height: auto;
-            border-radius: 10px;
-            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+        .content.active {
+            display: block;
         }
-        h1 {
-            font-size: 3em;
-        }
-        p {
-            margin-top: 10px;
-            font-size: 1.5em;
-        }
-        .btn {
-            display: inline-block;
+        .button {
             margin-top: 20px;
-            padding: 15px 30px;
-            font-size: 1.2em;
-            color: white;
-            background: #000000;
+            padding: 10px 20px;
+            font-size: 1.2rem;
+            background-color: #ffca28;
             border: none;
             border-radius: 10px;
             cursor: pointer;
-            transition: 0.3s;
-            text-decoration: none;
+            transition: all 0.3s;
         }
-        .btn:hover {
-            background: #bdb9b8;
+        .button:hover {
+            background-color: #f57f17;
+            color: white;
         }
+        .quick-access {
+            margin: 20px 0;
+        }
+        /* 다크 모드 스타일 */
+        .dark-mode {
+            background-color: #121212;
+            color: #ffffff;
+        }
+        .dark-mode .header {
+            background-color: #1f1f1f;
+        }
+        .dark-mode .nav a {
+            color: #fff598;
+        }
+        .dark-mode .nav a:hover {
+            color: #ffca28;
+        }
+        .dark-mode .content {
+            background-color: #333333;
+        }
+        .dark-mode .button {
+            background-color: #fff598;
+            color: rgb(0, 0, 0);
+        }
+        .dark-mode-toggle {
+            position: fixed;
+            top: 10px; /* 화면 상단에서 10px 떨어지게 */
+            right: 20px; /* 화면 오른쪽에서 20px 떨어지게 */
+            z-index: 1100; /* 네비게이션 바보다 위에 표시 */
+        }
+        .dark-mode-toggle .button {
+            padding: 8px 15px;
+            font-size: 1rem;
+            background-color: #ffca28;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .dark-mode-toggle .button:hover {
+            background-color: #f57f17;
+            color: white;
+        }
+.nav a {
+    font-size: 1.3rem; /* 크기 */
+    font-weight: bold; /* 굵게 */
+}
+.bottom-right {
+    position: fixed;
+    bottom: 10px;
+    right: 10px;
+    font-size: 1.5rem;
+    font-weight: bold;
+    background-color: rgba(253, 236, 136, 0.986);
+    padding: 10px 15px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+@media screen and (max-width: 900px) {
+    .header {
+        height: 50px; /* ✅ 작은 화면에서는 네비게이션 바 높이 줄이기 */
+        padding: 5px 20px;
+    }
+    
+    .nav {
+        gap: 15px; /* ✅ 메뉴 간격 줄이기 */
+    }
+    
+    .nav a {
+        font-size: 1.1rem; /* ✅ 작은 화면에서 글자 크기 줄이기 */
+    }
+    @media screen and (max-width: 900px) {
+    .header {
+        height: 50px;
+        padding: 5px 20px;
+    }
+
+    .nav {
+        gap: 15px;
+    }
+
+    .nav a {
+        font-size: 1.1rem;
+    }
+
+    .logo {
+        font-size: 2.5rem; /* ✅ 작은 화면에서도 너무 작아지지 않도록 설정 */
+    }
+}
+}
     </style>
 </head>
 <body>
-    <div class="image-wrapper">
-        <img src="KakaoTalk_20250201_051558636.jpg" alt="왼쪽 이미지"> 
-        <img src="KakaoTalk_20250108_082626382_01.jpg" alt="오른쪽 이미지"> 
+    <div class="dark-mode-toggle"> 
+        <button id="darkModeButton" class="button" onclick="toggleDarkMode()">🌙 다크모드</button>
+    </div>
+<div class="bottom-right" id="clock"></div>
+    </div>
+    <div class="header">
+        <div class="logo">미지💛</div>
+        <nav class="nav">
+            <a onclick="showPage('home')">홈</a>
+            <a onclick="showPage('naver')">네이버</a>
+            <a onclick="showPage('contact')">유튜브</a>
+            <a onclick="showPage('gwangjuUniv')">대학교</a>
+            <a onclick="showPage('gallery')">롤</a>
+            <a onclick="showPage('steam')">스팀</a>
+            <a onclick="showPage('fow')">포우</a>
+            <a onclick="showPage('namuwiki')">나무위키</a> <!-- ✅ 추가 -->
+            <a onclick="showPage('memo')">메모장</a> 
+        </nav>
+        </nav>
     </div>
     <div class="container">
-        <h1>항상 사랑해 미지야</h1>
-        <img src="민칼.png" alt="중앙 이미지" class="center-image">
-        <p>미지야, 롤하러 가자! 💛</p>
-        <a href="riotclient://launchproduct/lol" class="btn">요기 누르면 돼!!</a>
+        <p id="dday"></p>
+        <p id="loveMessage"></p>
+        <div class="quick-access">
+            <button class="button" onclick="openNaver()">네이버 열기</button>
+            <button class="button" onclick="openYouTube()">유튜브 열기</button>
+        </div>
+        <div id="home" class="content active">
+            <img src="민칼.png" alt="미지를 위한 이미지" width="150">
+            <h1>💛</h1>
+            <p>내 세상은 미지야</p>
+            <audio controls loop>
+                <source src="toxic till the end - ROSÉ.mp3" type="audio/mp3">
+                브라우저가 오디오 태그를 지원하지 않습니다.
+            </audio>
+        </div>
+        <div id="fow" class="content">
+            <h1>포우</h1>
+            <p>롤 전적 검색 사이트 포우입니다.</p>
+            <button class="button" onclick="open포우()">포우 열기</button>
+        </div>
+        <div id="naver" class="content">
+            <h1>네이버</h1>
+            <p>네이버로 이동합니다.</p>
+            <button class="button" onclick="openNaver()">네이버 열기</button>
+        </div>
+        <div id="gallery" class="content">
+            <h1>롤</h1>
+            <p>리그오브레전드 실행하기.</p>
+            <button class="button" onclick="openLOL()">롤 실행</button>
+        </div>
+        <div id="steam" class="content">
+            <h1>스팀</h1>
+            <p>스팀 클라이언트를 실행합니다.</p>
+            <button class="button" onclick="openSteam()">스팀 실행</button>
+        </div>
+        <div id="contact" class="content">
+            <h1>유튜브</h1>
+            <p>유튜브 실행하기</p>
+            <button class="button" onclick="openYouTube()">유튜브 열기</button>
+        </div>
+        <div id="namuwiki" class="content">
+            <h1>나무위키</h1>
+            <p>나무위키로 바로 이동합니다.</p>
+            <button class="button" onclick="openNamuWiki()">나무위키 열기</button>
+        </div>
+        <div id="memo" class="content">
+            <h1>📝 메모장</h1>
+            <textarea id="memoArea" rows="15" cols="60" 
+               style="width:100%; height:300px; font-size:18px;" 
+               placeholder="메모를 입력해봐요!"></textarea>
+            <br>
+            <button class="button" onclick="saveMemo()">메모 저장</button>
+            <button class="button" onclick="clearMemo()">메모 지우기</button>
+        </div>
+        <div id="gwangjuUniv" class="content">
+            <h1>🏫 광주대학교</h1>
+            <p>광주대학교 홈페이지로 이동합니다.</p>
+            <button class="button" onclick="openGwangjuUniv()">광주대학교 열기</button>
     </div>
+    
+    <script>
+        function showPage(pageId) {
+            let pages = document.getElementsByClassName("content");
+            for (let i = 0; i < pages.length; i++) {
+                pages[i].classList.remove("active");
+            }
+            document.getElementById(pageId).classList.add("active");
+        }
+        
+        function openLOL() {
+            window.open("riotclient://launchproduct/lol", "_blank");
+        }
+        
+        function openSteam() {
+            window.open("steam://open/main", "_blank");
+        }
+        
+        function openYouTube() {
+            window.open("https://www.youtube.com", "_blank");
+        }
+        
+        function openNaver() {
+            window.open("https://www.naver.com", "_blank");
+        }
+        
+        function open포우() {
+            window.open("https://fow.kr", "_blank");
+        }
+        function openNamuWiki() {
+    window.open("https://namu.wiki", "_blank");
+}
+        
+// 수정 후 최종 코드 예시
+const messages = [
+    "미지야 사랑해 💛",
+    "오늘도 행복한 하루 보내자! 😊",
+    "넌 내 세상의 빛이야! 🌟",
+    "늘 곁에 있을게! 💕",
+    "매일매일 네가 있어서 행복해 😊",
+    "힘든 순간에도 난 항상 네 편이야 💛",
+    "오늘 하루도 내 생각 많이 해줘! 🌟",
+    "넌 내 인생 최고의 선물이야 🎁",
+    "매일매일 네가 있어서 행복해 😊",
+    "힘든 순간에도 난 항상 네 편이야 💛",
+    "오늘 하루도 내 생각 많이 해줘! 🌟",
+    "넌 내 인생 최고의 선물이야 🎁",
+    "세상에서 제일 예쁜 미지!, 오늘 하루도 화이팅해!",
+    "너와 함께한 시간은 전부 소중해 💕"
+];
+document.getElementById("loveMessage").innerText = messages[Math.floor(Math.random() * messages.length)];
+
+        
+        const startDate = new Date("2025-02-20");
+        function updateDday() {
+            const now = new Date();
+            const diff = now - startDate;
+            const daysTogether = Math.floor(diff / (1000 * 60 * 60 * 24));
+            document.getElementById("dday").innerText = `우리 사귄 지 D+${daysTogether}일째 💕`;
+        }
+        updateDday();
+        function toggleDarkMode() {
+    document.body.classList.toggle('dark-mode'); // 다크모드 적용/해제
+
+    if (document.body.classList.contains('dark-mode')) {
+        localStorage.setItem('darkMode', 'on'); // 다크모드 상태 저장
+        document.getElementById("darkModeButton").innerText = "🌞 라이트모드"; // 버튼 변경
+    } else {
+        localStorage.setItem('darkMode', 'off'); // 다크모드 해제 상태 저장
+        document.getElementById("darkModeButton").innerText = "🌙 다크모드"; // 버튼 변경
+    }
+}
+
+// 🔄 새로고침해도 다크모드 유지되게 만들기
+window.onload = function () {
+    if (localStorage.getItem('darkMode') === 'on') { // 다크모드가 저장되어 있으면
+        document.body.classList.add('dark-mode'); // 다크모드 적용
+        document.getElementById("darkModeButton").innerText = "🌞 라이트모드"; // 버튼 변경
+    } else {
+        document.getElementById("darkModeButton").innerText = "🌙 다크모드"; // 기본값 설정
+    }
+};
+document.getElementById("memoArea").value = localStorage.getItem("memo") || "";
+
+// 저장 버튼 클릭시
+function saveMemo() {
+    localStorage.setItem("memo", document.getElementById("memoArea").value);
+    alert("저장 완료! 💛");
+}
+
+// 삭제 버튼 클릭시
+function clearMemo() {
+    if(confirm("정말 메모를 지울까요?")) {
+        localStorage.removeItem("memo");
+        document.getElementById("memoArea").value = "";
+    }
+}
+function openGwangjuUniv() {
+    window.open("https://www.gwangju.ac.kr/", "_blank");
+}
+function updateClock() {
+    const now = new Date();
+    const hours = String(now.getHours()).padStart(2, '0');
+    const minutes = String(now.getMinutes()).padStart(2, '0');
+    const seconds = String(now.getSeconds()).padStart(2, '0');
+    document.getElementById('clock').innerText = `${hours}:${minutes}:${seconds}`;
+}
+
+// 1초마다 시계 업데이트
+setInterval(updateClock, 1000);
+updateClock(); // 페이지 로드 시 실행
+    </script>
 </body>
 </html>
