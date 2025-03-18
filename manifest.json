@@ -1,0 +1,15 @@
+{
+    "name": "미지를 위한 공간",
+    "short_name": "미지💛",
+    "icons": [
+      {
+        "src": "마멜아이콘5.ico",
+        "sizes": "48x48",
+        "type": "image/x-icon"
+      }
+    ],
+    "start_url": "/",
+    "display": "standalone",
+    "background_color": "#ffffff",
+    "theme_color": "#ffeb3b"
+  }
