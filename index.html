@@ -22,7 +22,21 @@
     animation: fadeIn 2s ease-out forwards, glowEffect 3s infinite alternate;
     z-index: 999; /* ✅ 네비게이션 바로 아래 배치 */
 }
-
+ /* 다크모드 적용 시 배너 스타일 */
+ .dark-mode .banner {
+            color: #ffeb3b; /* 글씨 색상 노란색 */
+ }
+        /* 부드럽게 나타나는 효과 */
+        @keyframes fadeIn {
+            0% {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
 /* 천천히 나타나는 효과 */
 @keyframes fadeIn {
     0% {
