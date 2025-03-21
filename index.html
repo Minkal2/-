@@ -429,13 +429,18 @@ const messages = [
 document.getElementById("loveMessage").innerText = messages[Math.floor(Math.random() * messages.length)];
 
         
-        const startDate = new Date("2025-02-20");
-        function updateDday() {
-            const now = new Date();
-            const diff = now - startDate;
-            const daysTogether = Math.floor(diff / (1000 * 60 * 60 * 24));
-            document.getElementById("dday").innerText = `우리 사귄 지 D+${daysTogether}일째 💕`;
-        }
+const startDate = new Date("2025-02-20"); // 사귄 날 입력!
+
+function updateDday() {
+    const now = new Date();
+    const today = new Date(now.getFullYear(), now.getMonth(), now.getDate()); // 오늘 날짜 (시/분/초 제거)
+    const start = new Date(startDate.getFullYear(), startDate.getMonth(), startDate.getDate()); // 시작 날짜 (시/분/초 제거)
+
+    const diffTime = today - start;
+    const daysTogether = Math.floor(diffTime / (1000 * 60 * 60 * 24)) + 1; // 🔥 하루 더하기!
+
+    document.getElementById("dday").innerText = `우리 사귄 지 D+${daysTogether}일째 💕`;
+}
         updateDday();
         function toggleDarkMode() {
     document.body.classList.toggle('dark-mode'); // 다크모드 적용/해제
