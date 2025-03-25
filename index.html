@@ -78,7 +78,12 @@
 }
 
         body {
-            background-color: #fffde7;
+            background-color: #fffde7; /* 배경색 그대로 유지 */
+    background-image: url(마멜1.png); /* 왼쪽에만 이미지 */
+    background-repeat: no-repeat;
+    background-position: left bottom;
+    background-size: 200px auto;
+    background-attachment: fixed;
     font-family: 'Arial', sans-serif;
     margin: 0;
     padding: 80px 0 0 0; /* 네비게이션 바 높이만큼 여백 추가 */
@@ -304,6 +309,7 @@
             <a onclick="showPage('gallery')">롤</a>
             <a onclick="showPage('steam')">스팀</a>
             <a onclick="showPage('fow')">포우</a>
+            <a onclick="showPage('fhfcp')">롤체</a> 
             <a onclick="showPage('namuwiki')">나무위키</a> <!-- ✅ 추가 -->
             <a onclick="showPage('memo')">메모장</a> 
             <div class="nav-search">
@@ -341,6 +347,11 @@
             <h1>네이버</h1>
             <p>네이버로 이동합니다.</p>
             <button class="button" onclick="openNaver()">네이버 열기</button>
+        </div>
+        <div id="fhfcp" class="content">
+            <h1>롤토체스</h1>
+            <p>롤토체스 전적 검색 사이트입니다.</p>
+            <button class="button" onclick="openTFT()">롤체 열기</button>
         </div>
         <div id="gallery" class="content">
             <h1>롤</h1>
@@ -527,6 +538,9 @@ document.getElementById("naverSearch").addEventListener("keydown", function(even
         searchNaver(); // 검색 실행
     }
 });
+function openTFT() {
+    window.open("https://lolchess.gg/", "_blank");
+}
     </script>
     
 </body>
